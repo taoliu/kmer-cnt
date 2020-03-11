@@ -9,7 +9,6 @@ jobs:
   fast_finish: true
 install:
   - make
-  - python cython-setup.py install
 script:
   - wget https://gist.githubusercontent.com/taoliu/2501892/raw/92a66ba0cf6026dbdc0d3f941a9f8d6be6d6c176/prockreport
   - wget https://github.com/lh3/kmer-cnt/releases/download/v0.1/M_abscessus_HiSeq_10M.fa.gz
