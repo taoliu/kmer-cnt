@@ -1,0 +1,19 @@
+language: python
+os: linux
+dist: bionic
+jobs:
+  include:
+    - name: amd64
+      arch: amd64
+      python: 3.8
+  fast_finish: true
+install:
+  - make
+  - python cython-setup.py install
+script:
+  - wget https://gist.githubusercontent.com/taoliu/2501892/raw/92a66ba0cf6026dbdc0d3f941a9f8d6be6d6c176/prockreport
+  - wget https://github.com/lh3/kmer-cnt/releases/download/v0.1/M_abscessus_HiSeq_10M.fa.gz
+  - gunzip -c M_abscessus_HiSeq_10M.fa.gz | python kc-py1.py &> c.out &
+  - prockreport 0.5 $!
+  - python kc-py2.py 31  M_abscessus_HiSeq_10M.fa.gz &> d.out &
+  - prockreport 0.5 $!
